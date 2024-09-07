@@ -4,7 +4,7 @@ namespace CurrencyConverter.Repository.Interface
 {
     public interface IMySqlRepository
     {
-        Task Create(CurrencyModel currency);
+        Task<bool> Create(CurrencyModel currency);
         Task<CurrencyModel> Get(int id);
         Task Update(CurrencyModel currency);
         Task Delete(int id);

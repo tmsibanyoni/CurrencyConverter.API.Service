@@ -16,5 +16,9 @@
   <ItemGroup>
     <ProjectReference Include="..\CurrencyConverter.Repository\CurrencyConverter.Repository.csproj" />
   </ItemGroup>
-
+	
+  <ItemGroup>
+	<InternalsVisibleTo Include="$(AssemblyName).Test" />
+  </ItemGroup>
+  
 </Project>

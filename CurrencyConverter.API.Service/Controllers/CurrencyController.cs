@@ -7,10 +7,8 @@ namespace CurrencyConverter.API.Service.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CurrencyController(ILogger<CurrencyController> logger,
-                                    IDomainManager domainManager) : ControllerBase
+    public class CurrencyController(IDomainManager domainManager) : ControllerBase
     {
-        private readonly ILogger<CurrencyController> _logger = logger;
         private readonly IDomainManager _domainManager = domainManager;
 
         /// <summary>

@@ -45,11 +45,8 @@ namespace CurrencyConverter.Repository.Domain
             {
                 var finalValue = amount * value;
 
-                var lastId = mySqlRepository.GetAll().Result.Last().Id;
-
                 targetCurrency = new CurrencyModel()
                 {
-                    Id = ++lastId,
                     Base = source.ToUpper(),
                     Rate = value,
                     Target = target.ToUpper(),
@@ -57,7 +54,7 @@ namespace CurrencyConverter.Repository.Domain
                     TargetCurrency = finalValue
                 };
 
-                mySqlRepository.Create(targetCurrency);
+                await mySqlRepository.Create(targetCurrency);
 
                 return targetCurrency;
             }

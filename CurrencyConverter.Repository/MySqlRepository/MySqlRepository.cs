@@ -1,24 +1,42 @@
 ﻿using CurrencyConverter.Repository.Interface;
 using CurrencyConverter.Repository.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CurrencyConverter.Repository.MySqlRepository
 {
     public class MySqlRepository(ApplicationDbContext dbContext) : IMySqlRepository
     {
         private readonly ApplicationDbContext _dbContext = dbContext;
-        public async Task Create(CurrencyModel currency)
+        public async Task<bool> Create(CurrencyModel currency)
         {
             try
             {
                 if (currency != null)
                 {
+                    _dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                    var getLastId = _dbContext.Currency.FirstOrDefault();
+
+                    if (currency.Id == 0)
+                    {
+                        if (_dbContext.Currency.FirstOrDefault() == null)
+                            currency.Id = 1;
+                        else
+                        {
+                            var ID = ++(_dbContext.Currency.ToList().Last().Id);
+                            currency.Id = ID;
+                        }
+                    }
+
                     _dbContext.Currency.Add(currency);
                     _dbContext.SaveChanges();
-                    return;
+                    return await Task.FromResult(true);
                 }
+
+                return true;
             }
             catch (Exception ex)
             {
+                return false;
                 throw new Exception($"Error: {ex.Message}. StackTrace: {ex.StackTrace}");
             }
         }

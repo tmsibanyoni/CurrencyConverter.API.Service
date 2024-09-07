@@ -69,7 +69,7 @@ namespace CurrencyConverter.Repository.Service
         }
         public async Task<ExchangeRatesResponseModel> HistoricRates(DateTime date)
         {
-            var requestUrl = $"{openExchangeRatesOptions.Value.BaseUrl}historical/{date}.json?{app_id}";
+            var requestUrl = $"{openExchangeRatesOptions.Value.BaseUrl}historical/{date.ToString("yyyy-MM-dd")}.json?{app_id}";
 
             var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
 
