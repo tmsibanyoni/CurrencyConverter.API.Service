@@ -19,6 +19,11 @@ CREATE TABLE `currencyconverterdb`.`currency` (
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC) VISIBLE);
   
 ----------------------------------------------------------------------------------------
+REDIS
+----------------------------------------------------------------------------------------
+Please ensure that the lastes Redis has been insalled and that it is running.
+You may set the localhost:{PORT} on the appsettings.
+----------------------------------------------------------------------------------------
 SECRETS
 ----------------------------------------------------------------------------------------
 ProjectName: CurrencyConverter.API.Service
